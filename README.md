@@ -36,6 +36,7 @@ Add this step to your GitHub Actions workflow file (e.g., `.github/workflows/dep
 | **dry_run** | If `true`, shows what would happen without uploading. | `false` |
 | **exclude** | Comma-separated list of glob patterns to ignore. | `""` |
 | **only_newer**| Only transfer files that are newer than the remote. | `false` |
+| **verbose** | If `true`, displays detailed transfer progress and logs. | `true` |
 
 ## 🔒 Security
 
