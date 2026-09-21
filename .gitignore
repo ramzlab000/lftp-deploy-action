@@ -1,0 +1,34 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor/IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# Build artifacts
+dist/
+build/
+out/
+coverage/
+
+# Node.js
+node_modules/
+
+# Secrets / local config
+.env
+.env.*
+!.env.example
+
+# GitHub Actions / local test output
+*.out
+*.err

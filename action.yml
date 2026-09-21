@@ -1,0 +1,72 @@
+name: "LFTP Deploy"
+description: "Deploy files to FTP/FTPS/SFTP servers using lftp mirror (rsync-like sync)"
+branding:
+  icon: upload-cloud
+  color: blue
+author: "arroWebs"
+
+inputs:
+  host:
+    description: "Host (ftp.example.com)"
+    required: true
+  username:
+    description: "Username"
+    required: true
+  password:
+    description: "Password"
+    required: true
+  protocol:
+    description: "ftp, ftps, or sftp"
+    required: false
+    default: "ftp"
+  local_dir:
+    description: "Local directory to sync"
+    required: false
+    default: "."
+  remote_dir:
+    description: "Remote target directory"
+    required: true
+  delete:
+    description: "Delete remote files not present locally (dangerous!)"
+    required: false
+    default: "false"
+  dry_run:
+    description: "Show what would be done without making changes"
+    required: false
+    default: "false"
+  exclude:
+    description: "Comma-separated exclude patterns"
+    required: false
+  only_newer:
+    description: "Only transfer newer files"
+    required: false
+    default: "false"
+  verbose:
+    description: "Verbose output"
+    required: false
+    default: "true"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install lftp
+      shell: bash
+      run: |
+        sudo apt-get update -qq
+        sudo apt-get install -y lftp
+
+    - name: Deploy with lftp
+      shell: bash
+      env:
+        INPUT_HOST: ${{ inputs.host }}
+        INPUT_USERNAME: ${{ inputs.username }}
+        INPUT_PASSWORD: ${{ inputs.password }}
+        INPUT_PROTOCOL: ${{ inputs.protocol }}
+        INPUT_LOCAL_DIR: ${{ inputs.local_dir }}
+        INPUT_REMOTE_DIR: ${{ inputs.remote_dir }}
+        INPUT_DELETE: ${{ inputs.delete }}
+        INPUT_DRY_RUN: ${{ inputs.dry_run }}
+        INPUT_EXCLUDE: ${{ inputs.exclude }}
+        INPUT_ONLY_NEWER: ${{ inputs.only_newer }}
+        INPUT_VERBOSE: ${{ inputs.verbose }}
+      run: bash "${{ github.action_path }}/entrypoint.sh"
