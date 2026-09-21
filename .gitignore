@@ -32,3 +32,7 @@ node_modules/
 # GitHub Actions / local test output
 *.out
 *.err
+
+# Local documentation / references
+REFERENCE.md
+REFERENCE*.md
